@@ -1,0 +1,6 @@
+//PRODUCTION
+### get all contacts
+GET https://cse341-project1-rppn.onrender.com/contacts
+
+### get contact by id
+GET https://cse341-project1-rppn.onrender.com/contacts/681cc6314420ebcd740c66b2
