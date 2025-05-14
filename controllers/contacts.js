@@ -20,7 +20,7 @@ const getSingle = async (req, res) => {
 };
 
 // function to create a new user
-const createUser = async (req,res) => {
+const createUser = async (req, res) => {
   //#swagger.tags=['Contacts']
   const user = {
     firstName: req.body.firstName,
@@ -33,11 +33,11 @@ const createUser = async (req,res) => {
   if (response.acknowledged) {
     res.status(200).send();
   } else {
-    res.status(500).json(response.error || 'Some error occurred while creating the user')
+    res.status(500).json(response.error || 'Some error occurred while creating the user');
   }
-}
+};
 
-const updateUser = async (req,res) => {
+const updateUser = async (req, res) => {
   //#swagger.tags=['Contacts']
   const userId = new ObjectId(req.params.id);
   const user = {
@@ -47,23 +47,31 @@ const updateUser = async (req,res) => {
     favoriteColor: req.body.favoriteColor,
     birthday: req.body.birthday
   };
-  const response = await mongodb.getDatabase().db().collection('contacts').replaceOne({ _id: userId }, user);
+  const response = await mongodb
+    .getDatabase()
+    .db()
+    .collection('contacts')
+    .replaceOne({ _id: userId }, user);
   if (response.modifiedCount > 0) {
     res.status(200).send();
   } else {
-    res.status(500).json(response.error || 'Some error occurred while creating the user')
+    res.status(500).json(response.error || 'Some error occurred while creating the user');
   }
-}
+};
 
 const deleteUser = async (req, res) => {
   //#swagger.tags=['Contacts']
   const userId = new ObjectId(req.params.id);
-  const response = await mongodb.getDatabase().db().collection('contacts').deleteOne({ _id: userId });
+  const response = await mongodb
+    .getDatabase()
+    .db()
+    .collection('contacts')
+    .deleteOne({ _id: userId });
   if (response.deletedCount > 0) {
     res.status(200).send();
   } else {
     res.status(500).json(response.error || 'Some error occured while deleting the user.');
   }
-}
+};
 
 module.exports = { getAll, getSingle, createUser, updateUser, deleteUser };
